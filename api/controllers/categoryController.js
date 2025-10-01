@@ -1,0 +1,75 @@
+const db = require('../config/database');
+
+// 获取所有类别
+const getAllCategories = async (req, res) => {
+    try {
+        const sql = `
+            SELECT 
+                c.*,
+                COUNT(e.id) as event_count
+            FROM categories c
+            LEFT JOIN events e ON c.id = e.category_id AND e.is_active = TRUE AND e.is_suspended = FALSE
+            GROUP BY c.id, c.name, c.description
+            ORDER BY c.name
+        `;
+
+        const categories = await db.query(sql);
+
+        res.json({
+            success: true,
+            data: categories
+        });
+
+    } catch (error) {
+        console.error('获取类别列表错误:', error);
+        res.status(500).json({
+            success: false,
+            error: '获取类别列表失败',
+            message: error.message
+        });
+    }
+};
+
+// 根据ID获取类别
+const getCategoryById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const sql = `
+            SELECT 
+                c.*,
+                COUNT(e.id) as event_count
+            FROM categories c
+            LEFT JOIN events e ON c.id = e.category_id AND e.is_active = TRUE AND e.is_suspended = FALSE
+            WHERE c.id = ?
+            GROUP BY c.id, c.name, c.description
+        `;
+
+        const categories = await db.query(sql, [parseInt(id)]);
+
+        if (categories.length === 0) {
+            return res.status(404).json({
+                success: false,
+                error: '类别未找到'
+            });
+        }
+
+        res.json({
+            success: true,
+            data: categories[0]
+        });
+
+    } catch (error) {
+        console.error('获取类别错误:', error);
+        res.status(500).json({
+            success: false,
+            error: '获取类别失败',
+            message: error.message
+        });
+    }
+};
+
+module.exports = {
+    getAllCategories,
+    getCategoryById
+};

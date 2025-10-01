@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活动详情 - 慈善活动平台</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">慈善活动平台</a>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">首页</a></li>
+                <li><a href="/search" class="nav-link">搜索活动</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="event-detail-container">
+            <div class="loading">加载活动详情中...</div>
+        </div>
+    </div>
+
+    <!-- 信息模态框 -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h3>系统提示</h3>
+            <p id="modalMessage">此功能正在建设中</p>
+            <button class="btn" onclick="ModalManager.hideModal()">确定</button>
+        </div>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/event-details.js"></script>
+</body>
+</html>
