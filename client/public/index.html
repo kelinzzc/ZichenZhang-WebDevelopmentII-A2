@@ -3,59 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>慈善活动平台 - 首页</title>
+    <title>Charity event platform</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
+
+    <!-- navigation -->
 <body>
-    <!-- 导航栏 -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">慈善活动平台</a>
+            <a href="/" class="logo">Charity event platform</a>
             <ul class="nav-menu">
-                <li><a href="/" class="nav-link active">首页</a></li>
-                <li><a href="/search" class="nav-link">搜索活动</a></li>
+                <li><a href="/" class="nav-link active">Home</a></li>
+                <li><a href="/search" class="nav-link">Search</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- 主要内容 -->
+    <!-- front -->
     <main>
-        <!-- 英雄区域 -->
         <section class="hero">
             <div class="container">
-                <h1>为爱行动，改变世界</h1>
-                <p>加入我们的慈善活动，一起为需要帮助的人们带来希望和改变</p>
+                <h1>Act out of love and change the world.</h1>
+                <p>Join our charity event and together bring hope and change to those in need.</p>
             </div>
         </section>
 
+ <!-- About Us -->
         <div class="container">
-            <!-- 组织信息 -->
             <section class="organization-info" style="background:white;padding:2rem;border-radius:8px;margin-bottom:2rem;">
-                <h2>关于我们</h2>
-                <p>我们是一个致力于通过社区活动和公众参与来支持各种慈善事业的平台。我们的使命是连接慈善组织和热心的参与者，共同创造积极的社会影响。</p>
+                <h2>About Us</h2>
+                <p>We are a dynamic website that manages urban charity activities and is dedicated to sharing such activities. Our mission is to connect charitable organizations with enthusiastic participants, and jointly create positive social impacts.</p>
                 <div style="margin-top:1rem;">
-                    <p><strong>联系方式:</strong> contact@charityplatform.org | +61 2 1234 5678</p>
-                    <p><strong>地址:</strong> 123 Charity Street, Sydney NSW 2000</p>
+                    <p><strong>contact information:</strong> zzc030817@167.com</p>
+                    <p><strong>location:</strong>Guangxi University of Science and Technology</p>
                 </div>
             </section>
 
-            <!-- 活动列表 -->
             <section>
-                <h2>近期活动</h2>
+                <h2>near-term activities</h2>
                 <div id="events-container" class="events-grid">
-                    <div class="loading">加载活动中...</div>
+                    <div class="loading">Loading activity...</div>
                 </div>
             </section>
         </div>
     </main>
 
-    <!-- 信息模态框 -->
+
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
-            <h3>系统提示</h3>
+            <h3>system prompt</h3>
             <p id="modalMessage"></p>
-            <button class="btn" onclick="ModalManager.hideModal()">确定</button>
+            <button class="btn" onclick="ModalManager.hideModal()">confirm</button>
         </div>
     </div>
 

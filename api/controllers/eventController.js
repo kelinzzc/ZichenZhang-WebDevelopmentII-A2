@@ -1,6 +1,6 @@
 const db = require('../config/database');
 
-// 获取所有活动（首页用）
+// Get all events (homepage)
 const getAllEvents = async (req, res) => {
     try {
         const { page = 1, limit = 10, type = 'upcoming' } = req.query;
@@ -8,14 +8,13 @@ const getAllEvents = async (req, res) => {
 
         let whereClause = 'WHERE e.is_active = TRUE AND e.is_suspended = FALSE';
         
-        // 根据类型过滤活动
+        // Filter events by type
         if (type === 'upcoming') {
             whereClause += ' AND e.event_date >= CURDATE()';
         } else if (type === 'past') {
             whereClause += ' AND e.event_date < CURDATE()';
         }
 
-        // 修复：直接拼接LIMIT和OFFSET到SQL中
         const limitNum = parseInt(limit, 10);
         const offsetNum = parseInt(offset, 10);
 
@@ -47,12 +46,11 @@ const getAllEvents = async (req, res) => {
             LIMIT ${limitNum} OFFSET ${offsetNum}
         `;
 
-        console.log('🔍 执行查询:', sql);
+        console.log('🔍 Executing query:', sql);
         
-        // 使用query而不是execute，因为不需要参数绑定
         const events = await db.query(sql);
 
-        // 获取总数用于分页
+        // Get total count for pagination
         const countSql = `
             SELECT COUNT(*) as total 
             FROM events e 
@@ -73,16 +71,16 @@ const getAllEvents = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('获取活动列表错误:', error);
+        console.error('Get events list error:', error);
         res.status(500).json({
             success: false,
-            error: '获取活动列表失败',
+            error: 'Failed to get events list',
             message: error.message
         });
     }
 };
 
-// 搜索活动
+// Search events
 const searchEvents = async (req, res) => {
     try {
         const { date, location, category, keyword } = req.query;
@@ -90,7 +88,7 @@ const searchEvents = async (req, res) => {
         let whereConditions = ['e.is_active = TRUE AND e.is_suspended = FALSE'];
         let params = [];
 
-        // 构建动态查询条件
+        // Build dynamic query conditions
         if (date) {
             whereConditions.push('DATE(e.event_date) = ?');
             params.push(date);
@@ -145,16 +143,16 @@ const searchEvents = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('搜索活动错误:', error);
+        console.error('Search events error:', error);
         res.status(500).json({
             success: false,
-            error: '搜索活动失败',
+            error: 'Failed to search events',
             message: error.message
         });
     }
 };
 
-// 获取活动详情
+// Get event details
 const getEventById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -184,8 +182,8 @@ const getEventById = async (req, res) => {
         if (events.length === 0) {
             return res.status(404).json({
                 success: false,
-                error: '活动未找到',
-                message: '指定的活动不存在或已被暂停'
+                error: 'Event not found',
+                message: 'The specified event does not exist or has been suspended'
             });
         }
 
@@ -195,16 +193,16 @@ const getEventById = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('获取活动详情错误:', error);
+        console.error('Get event details error:', error);
         res.status(500).json({
             success: false,
-            error: '获取活动详情失败',
+            error: 'Failed to get event details',
             message: error.message
         });
     }
 };
 
-// 获取热门活动
+// Get featured events
 const getFeaturedEvents = async (req, res) => {
     try {
         const sql = `
@@ -239,10 +237,10 @@ const getFeaturedEvents = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('获取热门活动错误:', error);
+        console.error('Get featured events error:', error);
         res.status(500).json({
             success: false,
-            error: '获取热门活动失败',
+            error: 'Failed to get featured events',
             message: error.message
         });
     }

@@ -1,7 +1,7 @@
 const mysql = require('mysql2');
 require('dotenv').config();
 
-// 数据库配置
+// Database configuration
 const dbConfig = {
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
@@ -16,41 +16,41 @@ const dbConfig = {
     reconnect: true
 };
 
-// 创建连接池
+// Create connection pool
 const pool = mysql.createPool(dbConfig);
 const promisePool = pool.promise();
 
-// 连接测试函数
+// Connection test function
 const testConnection = async () => {
     try {
         const [rows] = await promisePool.query('SELECT NOW() as current_time');
-        console.log('✅ 数据库连接成功:', rows[0].current_time);
+        console.log('Database connection successful:', rows[0].current_time);
         return true;
     } catch (error) {
-        console.error('❌ 数据库连接失败:', error.message);
+        console.error('Database connection failed:', error.message);
         return false;
     }
 };
 
-// 通用查询函数
+// General query function
 const query = async (sql, params = []) => {
     try {
-        console.log(`🔍 执行查询: ${sql}`, params);
+        console.log(`Executing query: ${sql}`, params);
         const [rows] = await promisePool.execute(sql, params);
         return rows;
     } catch (error) {
-        console.error('❌ 查询执行失败:', error);
-        throw new Error(`数据库查询错误: ${error.message}`);
+        console.error('Query execution failed:', error);
+        throw new Error(`Database query error: ${error.message}`);
     }
 };
 
-// 关闭连接池
+// Close connection pool
 const closePool = async () => {
     try {
         await promisePool.end();
-        console.log('📦 数据库连接池已关闭');
+        console.log('Database connection pool closed');
     } catch (error) {
-        console.error('关闭连接池时出错:', error);
+        console.error('Error closing connection pool:', error);
     }
 };
 

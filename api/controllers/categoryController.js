@@ -1,6 +1,6 @@
 const db = require('../config/database');
 
-// 获取所有类别
+// Get all categories
 const getAllCategories = async (req, res) => {
     try {
         const sql = `
@@ -21,16 +21,16 @@ const getAllCategories = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('获取类别列表错误:', error);
+        console.error('Get categories list error:', error);
         res.status(500).json({
             success: false,
-            error: '获取类别列表失败',
+            error: 'Failed to get categories list',
             message: error.message
         });
     }
 };
 
-// 根据ID获取类别
+// Get category by ID
 const getCategoryById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -50,7 +50,7 @@ const getCategoryById = async (req, res) => {
         if (categories.length === 0) {
             return res.status(404).json({
                 success: false,
-                error: '类别未找到'
+                error: 'Category not found'
             });
         }
 
@@ -60,10 +60,10 @@ const getCategoryById = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('获取类别错误:', error);
+        console.error('Get category error:', error);
         res.status(500).json({
             success: false,
-            error: '获取类别失败',
+            error: 'Failed to get category',
             message: error.message
         });
     }

@@ -3,73 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>搜索活动 - 慈善活动平台</title>
+    <title>Charity event platform</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <!-- 导航栏 -->
+
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">慈善活动平台</a>
+            <a href="/" class="logo">Charity event platform</a>
             <ul class="nav-menu">
-                <li><a href="/" class="nav-link">首页</a></li>
-                <li><a href="/search" class="nav-link active">搜索活动</a></li>
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/search" class="nav-link active">Search</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
-        <h1>搜索慈善活动</h1>
+        <h1>Search for charity events</h1>
         
-        <!-- 搜索表单 -->
+        <!-- Search form -->
         <section class="search-container">
             <form id="searchForm" class="search-form">
                 <div class="form-group">
-                    <label for="searchKeyword">关键词</label>
-                    <input type="text" id="searchKeyword" class="form-control" placeholder="输入活动名称或描述...">
+                    <label for="searchKeyword"></label>
+                    <input type="text" id="searchKeyword" class="form-control" placeholder="Enter the name of the activity or its description...">
                 </div>
                 
                 <div class="form-group">
-                    <label for="searchDate">活动日期</label>
+                    <label for="searchDate">activity date</label>
                     <input type="date" id="searchDate" class="form-control">
                 </div>
                 
                 <div class="form-group">
-                    <label for="searchLocation">地点</label>
-                    <input type="text" id="searchLocation" class="form-control" placeholder="输入城市或地点...">
+                    <label for="searchLocation">place</label>
+                    <input type="text" id="searchLocation" class="form-control" placeholder="Enter the city or location...">
                 </div>
                 
                 <div class="form-group">
-                    <label for="searchCategory">活动类别</label>
+                    <label for="searchCategory">Activity category</label>
                     <select id="searchCategory" class="form-control">
-                        <option value="">所有类别</option>
-                        <!-- 类别将通过JavaScript动态加载 -->
+                        <option value="">all categories</option>
                     </select>
                 </div>
                 
                 <div class="form-actions">
-                    <button type="submit" class="btn">搜索活动</button>
-                    <button type="button" class="btn btn-secondary" onclick="clearFilters()">清除筛选</button>
+                    <button type="submit" class="btn">Search activity</button>
+                    <button type="button" class="btn btn-secondary" onclick="clearFilters()">Clear filter</button>
                 </div>
             </form>
         </section>
 
-        <!-- 搜索结果 -->
+        <!-- search result -->
         <section>
-            <h2>搜索结果</h2>
+            <h2>search result</h2>
             <div id="search-results" class="events-grid">
-                <div class="no-results">使用上面的表单搜索活动</div>
+                <div class="no-results">Use the form to search for activities</div>
             </div>
         </section>
     </div>
 
-    <!-- 信息模态框 -->
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
-            <h3>系统提示</h3>
+            <h3>system prompt</h3>
             <p id="modalMessage"></p>
-            <button class="btn" onclick="ModalManager.hideModal()">确定</button>
+            <button class="btn" onclick="ModalManager.hideModal()">confirm</button>
         </div>
     </div>
 

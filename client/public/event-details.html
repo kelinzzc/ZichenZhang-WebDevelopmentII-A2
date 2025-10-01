@@ -3,34 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>活动详情 - 慈善活动平台</title>
+    <title>Charity event platform</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <!-- 导航栏 -->
+    <!-- navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">慈善活动平台</a>
+            <a href="/" class="logo">Charity event platform</a>
             <ul class="nav-menu">
-                <li><a href="/" class="nav-link">首页</a></li>
-                <li><a href="/search" class="nav-link">搜索活动</a></li>
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/search" class="nav-link">Search</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
         <div id="event-detail-container">
-            <div class="loading">加载活动详情中...</div>
+            <div class="loading">Details of the event are loading...</div>
         </div>
     </div>
 
-    <!-- 信息模态框 -->
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
-            <h3>系统提示</h3>
-            <p id="modalMessage">此功能正在建设中</p>
-            <button class="btn" onclick="ModalManager.hideModal()">确定</button>
+            <h3>system prompt</h3>
+            <p id="modalMessage">There is no such function available at present.</p>
+            <button class="btn" onclick="ModalManager.hideModal()">confirm</button>
         </div>
     </div>
 

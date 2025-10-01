@@ -5,15 +5,15 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.CLIENT_PORT || 3001;
 
-// 中间件
+// Middleware
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// API代理配置（如果需要）
+// API proxy configuration 
 const API_BASE_URL = process.env.API_URL || 'http://localhost:3000';
 
-// 路由
+// Routes
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -26,8 +26,8 @@ app.get('/event/:id', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'event-details.html'));
 });
 
-// 启动服务器
+// Start server
 app.listen(PORT, () => {
-    console.log(`🌐 客户端服务器运行在 http://localhost:${PORT}`);
-    console.log(`📱 首页: http://localhost:${PORT}`);
+    console.log(`Client server running at http://localhost:${PORT}`);
+    console.log(`Homepage: http://localhost:${PORT}`);
 });
