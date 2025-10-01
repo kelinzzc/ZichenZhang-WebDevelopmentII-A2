@@ -2,30 +2,30 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-// 导入路由
+// Import routes
 const eventRoutes = require('./routes/events');
 const categoryRoutes = require('./routes/categories');
 
-// 初始化Express应用
+// Initialize Express application
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 中间件配置
+// Middleware configuration
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 静态文件服务（为客户端提供图片等资源）
+// Static file serving
 app.use('/images', express.static('public/images'));
 
-// API路由配置
+// API route configuration
 app.use('/api/events', eventRoutes);
 app.use('/api/categories', categoryRoutes);
 
-// 根路径路由
+// Root path route
 app.get('/', (req, res) => {
     res.json({
-        message: '慈善活动API服务运行中',
+        message: 'Charity Events API service is running',
         version: '1.0.0',
         endpoints: {
             events: '/api/events',
@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
     });
 });
 
-// 健康检查端点
+// Health check endpoint
 app.get('/health', (req, res) => {
     res.json({ 
         status: 'OK', 
@@ -43,27 +43,27 @@ app.get('/health', (req, res) => {
     });
 });
 
-// 404处理
+// 404 handler
 app.use('*', (req, res) => {
     res.status(404).json({
-        error: '端点未找到',
-        message: `请求的路径 ${req.originalUrl} 不存在`
+        error: 'Endpoint not found',
+        message: `The requested path ${req.originalUrl} does not exist`
     });
 });
 
-// 全局错误处理中间件
+// Global error handling middleware
 app.use((error, req, res, next) => {
-    console.error('服务器错误:', error);
+    console.error('Server error:', error);
     res.status(500).json({
-        error: '内部服务器错误',
-        message: process.env.NODE_ENV === 'development' ? error.message : '请稍后重试'
+        error: 'Internal server error',
+        message: process.env.NODE_ENV === 'development' ? error.message : 'Please try again later'
     });
 });
 
-// 启动服务器
+// Start server
 app.listen(PORT, () => {
-    console.log(`🚀 API服务器运行在端口 ${PORT}`);
-    console.log(`📚 API文档: http://localhost:${PORT}`);
+    console.log(`API server running on port ${PORT}`);
+    console.log(`API documentation: http://localhost:${PORT}`);
 });
 
 module.exports = app;

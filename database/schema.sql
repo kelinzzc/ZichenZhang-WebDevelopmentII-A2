@@ -1,4 +1,4 @@
--- 创建组织表
+-- Create an organizational chart
 CREATE TABLE organizations (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE organizations (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 创建类别表
+-- Create category table
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE categories (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 创建活动表
+-- Create an activity table
 CREATE TABLE events (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE events (
     FOREIGN KEY (organization_id) REFERENCES organizations(id)
 );
 
--- 创建注册表（为A3预留）
+-- Create registry
 CREATE TABLE registrations (
     id INT AUTO_INCREMENT PRIMARY KEY,
     event_id INT,

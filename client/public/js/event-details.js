@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 初始化模态框
+    // Initialize
     ModalManager.init();
     
-    // 从URL获取活动ID并加载详情
+    // Get event ID from URL and load details
     const eventId = getEventIdFromUrl();
     if (eventId) {
         loadEventDetails(eventId);
     } else {
-        showError('无效的活动ID');
+        showError('Invalid event ID');
     }
 });
 
@@ -27,12 +27,12 @@ async function loadEventDetails(eventId) {
         if (response.success) {
             renderEventDetails(container, response.data);
         } else {
-            throw new Error(response.error || '获取活动详情失败');
+            throw new Error(response.error || 'Failed to get event details');
         }
         
     } catch (error) {
-        console.error('加载活动详情失败:', error);
-        showError('加载活动详情失败，请稍后重试');
+        console.error('Failed to load event details:', error);
+        showError('Failed to load event details, please try again later');
     }
 }
 
@@ -44,56 +44,56 @@ function renderEventDetails(container, event) {
         <article class="event-detail">
             <div class="detail-header">
                 <h1>${event.title}</h1>
-                <p>由 ${event.organization_name} 主办</p>
+                <p>Organized by ${event.organization_name}</p>
             </div>
             
             <div class="detail-content">
                 <div class="detail-info">
-                    <h2>活动详情</h2>
+                    <h2>Event Details</h2>
                     <p>${event.full_description || event.description}</p>
                     
                     <div class="detail-meta">
                         <div class="meta-item">
-                            <span class="meta-label">📅 活动时间</span>
+                            <span class="meta-label">Event Date</span>
                             <span>${DOMUtils.formatDate(event.event_date)}</span>
                         </div>
                         <div class="meta-item">
-                            <span class="meta-label">📍 活动地点</span>
+                            <span class="meta-label">Location</span>
                             <span>${event.location}</span>
                             ${event.venue_details ? `<small>${event.venue_details}</small>` : ''}
                         </div>
                         <div class="meta-item">
-                            <span class="meta-label">🎯 活动类别</span>
+                            <span class="meta-label">Category</span>
                             <span>${event.category_name}</span>
                         </div>
                         <div class="meta-item">
-                            <span class="meta-label">👥 主办组织</span>
+                            <span class="meta-label">Organizer</span>
                             <span>${event.organization_name}</span>
                         </div>
                     </div>
                     
-                    <h3>筹款进度</h3>
+                    <h3>Fundraising Progress</h3>
                     <div class="event-progress" style="margin:1.5rem 0;">
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: ${progressPercentage}%"></div>
                         </div>
                         <div class="progress-text">
-                            <span>已筹集: ${DOMUtils.formatCurrency(event.current_amount)}</span>
-                            <span>目标: ${DOMUtils.formatCurrency(event.goal_amount)}</span>
+                            <span>Raised: ${DOMUtils.formatCurrency(event.current_amount)}</span>
+                            <span>Goal: ${DOMUtils.formatCurrency(event.goal_amount)}</span>
                             <span>${progressPercentage}%</span>
                         </div>
                         ${remainingAmount > 0 ? 
                             `<p style="text-align:center;margin-top:0.5rem;color:#666;">
-                                还需筹集 ${DOMUtils.formatCurrency(remainingAmount)} 达成目标
+                                Need ${DOMUtils.formatCurrency(remainingAmount)} more to reach goal
                             </p>` : 
                             `<p style="text-align:center;margin-top:0.5rem;color:var(--success-color);">
-                                🎉 筹款目标已达成！
+                                Fundraising goal achieved!
                             </p>`
                         }
                     </div>
                     
                     ${event.organization_description ? `
-                        <h3>关于主办方</h3>
+                        <h3>About the Organizer</h3>
                         <p>${event.organization_description}</p>
                         ${event.mission_statement ? `<blockquote style="border-left:4px solid var(--accent-color);padding-left:1rem;margin:1rem 0;font-style:italic;">
                             ${event.mission_statement}
@@ -103,22 +103,22 @@ function renderEventDetails(container, event) {
                 
                 <div class="detail-sidebar">
                     <div class="ticket-info">
-                        <h3>参与活动</h3>
+                        <h3>Join the Event</h3>
                         <div class="ticket-price">
-                            ${event.ticket_price === 0 ? '免费' : DOMUtils.formatCurrency(event.ticket_price)}
+                            ${event.ticket_price === 0 ? 'Free' : DOMUtils.formatCurrency(event.ticket_price)}
                         </div>
-                        <p>${event.ticket_price === 0 ? '免费参与，欢迎捐款支持' : '票价包含活动参与和基础服务'}</p>
+                        <p>${event.ticket_price === 0 ? 'Free participation, donations welcome' : 'Ticket includes event participation and basic services'}</p>
                     </div>
                     
                     <button class="btn" style="width:100%;margin-bottom:1rem;" onclick="handleRegistration()">
-                        立即注册
+                        Register Now
                     </button>
                     
                     <div style="background:white;padding:1rem;border-radius:4px;border:1px solid var(--border-color);">
-                        <h4>📞 联系方式</h4>
-                        ${event.contact_email ? `<p>邮箱: ${event.contact_email}</p>` : ''}
-                        ${event.contact_phone ? `<p>电话: ${event.contact_phone}</p>` : ''}
-                        ${event.address ? `<p>地址: ${event.address}</p>` : ''}
+                        <h4>📞 Contact Information</h4>
+                        ${event.contact_email ? `<p>Email: ${event.contact_email}</p>` : ''}
+                        ${event.contact_phone ? `<p>Phone: ${event.contact_phone}</p>` : ''}
+                        ${event.address ? `<p>Address: ${event.address}</p>` : ''}
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@ function renderEventDetails(container, event) {
 }
 
 function handleRegistration() {
-    ModalManager.showModal('此功能正在建设中，将在后续版本中开放。');
+    ModalManager.showModal('This feature is under construction and will be available in future versions.');
 }
 
 function showError(message) {
@@ -137,5 +137,5 @@ function showError(message) {
     DOMUtils.showError(container, message);
 }
 
-// 全局函数
+// Global functions
 window.handleRegistration = handleRegistration;

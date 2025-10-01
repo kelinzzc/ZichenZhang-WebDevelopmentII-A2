@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 初始化模态框
+    // Initialize modal
     ModalManager.init();
     
-    // 加载类别数据
+    // Load category data
     loadCategories();
     
-    // 绑定搜索表单提交事件
+    // Bind search form submit event
     const searchForm = document.getElementById('searchForm');
     searchForm.addEventListener('submit', handleSearch);
 });
@@ -20,23 +20,23 @@ async function loadCategories() {
             categories = response.data;
             populateCategoryDropdown();
         } else {
-            throw new Error(response.error || '加载类别失败');
+            throw new Error(response.error || 'Failed to load categories');
         }
     } catch (error) {
-        console.error('加载类别失败:', error);
-        ModalManager.showModal('加载类别失败，请刷新页面重试');
+        console.error('Failed to load categories:', error);
+        ModalManager.showModal('Failed to load categories, please refresh the page and try again');
     }
 }
 
 function populateCategoryDropdown() {
     const categorySelect = document.getElementById('searchCategory');
     
-    // 清空现有选项（除了"所有类别"）
+    // Clear existing options
     while (categorySelect.children.length > 1) {
         categorySelect.removeChild(categorySelect.lastChild);
     }
     
-    // 添加类别选项
+    // Add category options
     categories.forEach(category => {
         const option = document.createElement('option');
         option.value = category.id;
@@ -51,7 +51,7 @@ async function handleSearch(event) {
     const resultsContainer = document.getElementById('search-results');
     DOMUtils.showLoading(resultsContainer);
     
-    // 收集搜索参数
+    // Collect search parameters
     const searchParams = new URLSearchParams();
     
     const keyword = document.getElementById('searchKeyword').value.trim();
@@ -71,28 +71,28 @@ async function handleSearch(event) {
             if (response.data.length === 0) {
                 resultsContainer.innerHTML = `
                     <div class="no-results">
-                        <h3>没有找到匹配的活动</h3>
-                        <p>尝试调整搜索条件或清除筛选器</p>
-                        <button class="btn" onclick="clearFilters()">清除筛选</button>
+                        <h3>No matching events found</h3>
+                        <p>Try adjusting your search criteria or clear filters</p>
+                        <button class="btn" onclick="clearFilters()">Clear Filters</button>
                     </div>
                 `;
             } else {
                 EventRenderer.renderEvents(resultsContainer, response.data);
             }
         } else {
-            throw new Error(response.error || '搜索失败');
+            throw new Error(response.error || 'Search failed');
         }
     } catch (error) {
-        console.error('搜索失败:', error);
-        DOMUtils.showError(resultsContainer, '搜索失败，请稍后重试');
+        console.error('Search failed:', error);
+        DOMUtils.showError(resultsContainer, 'Search failed, please try again later');
     }
 }
 
 function clearFilters() {
     document.getElementById('searchForm').reset();
-    document.getElementById('search-results').innerHTML = '<div class="no-results">使用上面的表单搜索活动</div>';
+    document.getElementById('search-results').innerHTML = '<div class="no-results">Use the form above to search for events</div>';
 }
 
-// 全局函数
+// Global functions
 window.clearFilters = clearFilters;
 window.handleSearch = handleSearch;

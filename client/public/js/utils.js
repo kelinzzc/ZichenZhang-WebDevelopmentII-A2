@@ -1,7 +1,7 @@
-// API基础URL
+// API base URL
 const API_BASE_URL = 'http://localhost:3000/api';
 
-// 通用API调用函数
+// Generic API call functions
 class ApiService {
     static async get(url) {
         try {
@@ -11,7 +11,7 @@ class ApiService {
             }
             return await response.json();
         } catch (error) {
-            console.error('API请求失败:', error);
+            console.error('API request failed:', error);
             throw error;
         }
     }
@@ -30,16 +30,16 @@ class ApiService {
             }
             return await response.json();
         } catch (error) {
-            console.error('API请求失败:', error);
+            console.error('API request failed:', error);
             throw error;
         }
     }
 }
 
-// DOM工具函数
+// DOM utility functions
 class DOMUtils {
     static showLoading(element) {
-        element.innerHTML = '<div class="loading">加载中...</div>';
+        element.innerHTML = '<div class="loading">Loading...</div>';
     }
 
     static showError(element, message) {
@@ -52,7 +52,7 @@ class DOMUtils {
 
     static formatDate(dateString) {
         const date = new Date(dateString);
-        return date.toLocaleDateString('zh-CN', {
+        return date.toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
@@ -63,9 +63,9 @@ class DOMUtils {
     }
 
     static formatCurrency(amount) {
-        return new Intl.NumberFormat('zh-CN', {
+        return new Intl.NumberFormat('en-US', {
             style: 'currency',
-            currency: 'CNY'
+            currency: 'USD'
         }).format(amount);
     }
 
@@ -77,7 +77,7 @@ class DOMUtils {
     }
 }
 
-// 事件卡片渲染器
+// Event card renderer
 class EventRenderer {
     static createEventCard(event) {
         const progressPercentage = Math.min(event.progress_percentage || 0, 100);
@@ -102,15 +102,15 @@ class EventRenderer {
                             <div class="progress-fill" style="width: ${progressPercentage}%"></div>
                         </div>
                         <div class="progress-text">
-                            <span>已筹集: ${DOMUtils.formatCurrency(event.current_amount)}</span>
+                            <span>Raised: ${DOMUtils.formatCurrency(event.current_amount)}</span>
                             <span>${progressPercentage}%</span>
                         </div>
                     </div>
                     <div class="event-meta">
                         <span>📍 ${event.location}</span>
-                        <span>🎫 ${event.ticket_price === 0 ? '免费' : DOMUtils.formatCurrency(event.ticket_price)}</span>
+                        <span>🎫 ${event.ticket_price === 0 ? 'Free' : DOMUtils.formatCurrency(event.ticket_price)}</span>
                     </div>
-                    <a href="/event/${event.id}" class="btn" style="margin-top:1rem;display:block;text-align:center;">查看详情</a>
+                    <a href="/event/${event.id}" class="btn" style="margin-top:1rem;display:block;text-align:center;">View Details</a>
                 </div>
             </div>
         `;
@@ -118,7 +118,7 @@ class EventRenderer {
 
     static renderEvents(container, events) {
         if (!events || events.length === 0) {
-            container.innerHTML = '<div class="no-results">没有找到相关活动</div>';
+            container.innerHTML = '<div class="no-results">No related events found</div>';
             return;
         }
 
@@ -127,7 +127,7 @@ class EventRenderer {
     }
 }
 
-// 模态框管理器
+// Modal manager
 class ModalManager {
     static showModal(message) {
         const modal = document.getElementById('infoModal');
@@ -161,7 +161,7 @@ class ModalManager {
     }
 }
 
-// 导出到全局作用域
+// Export to global scope
 window.ApiService = ApiService;
 window.DOMUtils = DOMUtils;
 window.EventRenderer = EventRenderer;

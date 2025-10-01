@@ -1,21 +1,14 @@
-# 慈善活动API文档
-
-## 基础信息
-- **基础URL**: `http://localhost:3000/api`
-- **内容类型**: `application/json`
-
-## 端点概览
-
-### 活动相关端点
-
-#### 获取活动列表
-- **URL**: `/events`
-- **方法**: `GET`
-- **参数**:
-  - `page` (可选): 页码，默认1
-  - `limit` (可选): 每页数量，默认10
-  - `type` (可选): 活动类型，`upcoming`(即将到来) 或 `past`(过去)
-
-**示例请求**:
-```bash
-GET /api/events?page=1&limit=5&type=upcoming
+# Charity Activity API Documentation 
+## Basic Information
+- **Base URL**: `http://localhost:3000/api`
+- **Content Type**: `application/json` 
+## Endpoint Overview 
+Activity-related endpoints 
+#### Obtain the list of activities - **URL**: `/events`
+- **Method**: `GET`
+- **Parameters**:
+- `page` (optional): Page number, default is 1
+- `limit` (optional): Number of items per page, default is 10
+- `type` (optional): Activity type, either `upcoming` (coming soon) or `past` (past) 
+Please provide an accurate and fluent English translation of the following text, following the natural and smooth expression habits of English ```bash
+GET /api/events? page=1&limit=5&type=upcoming

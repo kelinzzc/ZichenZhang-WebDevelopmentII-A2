@@ -1,4 +1,4 @@
-/* 基础样式重置 */
+/* Basic style */
 * {
     margin: 0;
     padding: 0;
@@ -25,7 +25,7 @@ body {
     background-color: #f8f9fa;
 }
 
-/* 导航栏样式 */
+/* style */
 .navbar {
     background-color: var(--primary-color);
     padding: 1rem 0;
@@ -67,7 +67,7 @@ body {
     background-color: var(--secondary-color);
 }
 
-/* 主要内容区域 */
+/* main content */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -95,7 +95,7 @@ body {
     opacity: 0.9;
 }
 
-/* 活动卡片样式 */
+/* Activity card */
 .events-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -208,7 +208,7 @@ body {
     background-color: #545b62;
 }
 
-/* 搜索页面样式 */
+/* search page */
 .search-container {
     background: white;
     padding: 2rem;
@@ -254,7 +254,7 @@ body {
     margin-top: 1rem;
 }
 
-/* 活动详情页面样式 */
+/* Activity Details Page */
 .event-detail {
     background: white;
     border-radius: 8px;
@@ -320,7 +320,7 @@ body {
     margin: 1rem 0;
 }
 
-/* 加载和错误状态 */
+/* Loading and error status */
 .loading {
     text-align: center;
     padding: 2rem;
@@ -342,7 +342,7 @@ body {
     color: #666;
 }
 
-/* 模态框样式 */
+/* Modal box */
 .modal {
     display: none;
     position: fixed;
@@ -371,7 +371,7 @@ body {
     cursor: pointer;
 }
 
-/* 响应式设计 */
+/* reactive */
 @media (max-width: 768px) {
     .nav-menu {
         flex-direction: column;

@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 初始化模态框
+    // Initialize modal
     ModalManager.init();
     
-    // 加载活动数据
+    // Load event data
     loadEvents();
 });
 
@@ -12,20 +12,20 @@ async function loadEvents() {
     try {
         DOMUtils.showLoading(container);
         
-        // 获取即将到来的活动
+        // Get upcoming events
         const response = await ApiService.get('/events?type=upcoming&limit=12');
         
         if (response.success) {
             EventRenderer.renderEvents(container, response.data);
         } else {
-            throw new Error(response.error || '获取活动数据失败');
+            throw new Error(response.error || 'Failed to fetch event data');
         }
         
     } catch (error) {
-        console.error('加载活动失败:', error);
-        DOMUtils.showError(container, '加载活动失败，请稍后重试');
+        console.error('Failed to load events:', error);
+        DOMUtils.showError(container, 'Failed to load events, please try again later');
     }
 }
 
-// 全局函数，供其他脚本使用
+// Global function for use by other scripts
 window.loadEvents = loadEvents;
